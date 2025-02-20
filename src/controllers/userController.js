@@ -40,7 +40,6 @@ const router = {
     updateUser: (req, res) => {
         try {
             res.status(200).json(lista.updateUser(req.params.id, req.body));
-            console.log(lista)
         } catch (error) {
             res.status(400).json({ message: "User not updated" });
         }
