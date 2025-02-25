@@ -13,7 +13,7 @@ class PostList {
         return this.posts.filter(post => (now - new Date(post.createdAt)) <= 30000);
     }
 
-    getPostsById(id) {
+    getPostById(id) {
         const post = this.posts.find(post => post.id == id);
         if (!post) {
             throw new Error("Post not Found");
@@ -29,8 +29,8 @@ class PostList {
         return posts;
     }
 
-    updatePots(id, updateData) {
-        const post = this.getPostsById(id);
+    updatePost(id, updateData) {
+        const post = this.getPostById(id);
         Object.assign(post, updateData);
         return post;
     }
