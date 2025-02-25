@@ -10,7 +10,7 @@ class PostList {
 
     getAllPosts() {
         const now = new Date();
-        return this.posts.filter(post => (now - new Date(post.createdAt)) <= 30000);
+        return this.posts.filter(post => (now - new Date(post.createdAt)) <= 60000);
     }
 
     getPostById(id) {

@@ -39,6 +39,10 @@ const router = {
 
     updatePost: (req, res) => {
         try {
+            const { legend, addPerson } = req.body;
+            if (!legend) {
+                res.status(400).json({ message: "Legend are required" });
+            }
             res.status(200).json(postagens.updatePost(req.params.id, req.body));
         } catch (error) {
             res.status(400).json({ message: "User not updated" });
