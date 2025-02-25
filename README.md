@@ -1,11 +1,7 @@
-# 🚀 API- Usuários
+# 🚀 Documentação das APIs
 
-Atividade proposta para criação de uma API que deve permitir listar, adicionar, atualizar e deletar usuários.
+### API - Usuários
+https://documenter.getpostman.com/view/42619953/2sAYdeMXSf
 
-![GET](./img/get-1.png)
-![POST](./img/post-1.png)
-![POST](./img/post-2.png)
-![PUT](./img/put-1.png)
-![PUT](./img/put-2.png)
-![DELETE](./img/delete-1.png)
-![GET](./img/get-2.png)
+### API - Post
+https://documenter.getpostman.com/view/42619953/2sAYdeMXSd
