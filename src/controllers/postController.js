@@ -1,7 +1,4 @@
-const Post = require("../models/Post")
-const PostList = require("../models/PostList");
-
-const postagens = new PostList();
+const Post = require("../models/postModel")
 
 const router = {
 
