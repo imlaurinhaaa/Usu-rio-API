@@ -1,62 +1,57 @@
-const Post = require("../models/postModel")
+const postModel = require("../models/postModel");
 
-const router = {
-
-    addPostByUserID: (req, res) => {
-        try {
-            const { image, legend, addPerson, music, localization } = req.body;
-            const newPost = new Post(image, legend, addPerson, music, localization);
-            postagens.addPostByUserID(newPost, req.params.id);
-            res.status(200).json(newPost);
-            if (!image) {
-                res.status(400).json({ message: "Image is required" });
-            }
-        } catch (error) {
-            res.status(400).json({ message: "Post not created" });
-        }
-    },
-
-    getAllPosts: (req, res) => {    
-        try {
-            const posts = postagens.getAllPosts();
-            res.status(200).json(posts);
-        } catch (error) {
-            res.status(400).json({ message: "Posts Not Found" });
-        }
-    },
-
-    getPostById: (req, res) => {
-        try {
-            const id  = req.params.id;
-            res.status(200).json(postagens.getPostById(id));
-        } catch (error) {
-            res.status(400).json({ message: "User not found" });
-        }
-    },
-
-    updatePost: (req, res) => {
-        try {
-            const { legend, addPerson } = req.body;
-            if (!legend) {
-                res.status(400).json({ message: "Legend are required" });
-            }
-            res.status(200).json(postagens.updatePost(req.params.id, req.body));
-        } catch (error) {
-            res.status(400).json({ message: "User not updated" });
-        }
-    },
-
-    deletePost: (req, res) => {
-        try {
-            const { id } = req.params;
-            postagens.deletePost(id);
-            res.json({ message: "Post deleted" });
-        } catch (error) {
-            res.status(400).json({ message: "Post not deleted" });
-        }
+const getAllPosts = async (req, res) => {
+    try {
+        const posts = await postModel.getPosts();
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(500).json({message: "Error found posts"});
     }
+};
 
+const getPost = async (req, res) => {
+    try {
+        const post = await postModel.getPostById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(500).json({ message: "Error found post" });
+    }
+};
 
+const createPost = async (req, res) => {
+    try {
+        const { user_id, image, description, add_person, localization } = req.body;
+        const newPost = await postModel.createPost(user_id, image, description, add_person, localization);
+        res.status(201).json(newPost);
+    } catch (error) {
+        res.status(500).json({ message: "Error creating post" });
+    }
+};
+
+const updatePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { description, add_person } = req.body;
+        const updatedPost = await postModel.updatePost(id, description, add_person);
+        if (!updatedPost) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        res.status(500).json({ message: "Error updating post" });
+    }
+};
+
+const deletePost = async (req, res) => {
+    try {
+        const message = await postModel.deletePost(req.params.id);
+        res.json(message)
+    } catch (error) {
+        res.status(404).json({ message: "Error deleting post" });
+    }
 }
 
-module.exports = router;
+module.exports = { getAllPosts, getPost, createPost, updatePost, deletePost };
