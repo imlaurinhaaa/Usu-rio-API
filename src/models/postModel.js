@@ -1,12 +1,12 @@
 const pool = require("../config/database");
 
 const getPosts = async () => {
-    const result = await pool.query("SELECT * FROM posts");
+    const result = await pool.query("SELECT posts.id, posts.image, posts.description, posts.add_person, posts.localization, users.name AS usuario FROM posts LEFT JOIN users ON posts.user_id = users.id");
     return result.rows;
 };
 
 const getPostById = async (id) => {
-    const result = await pool.query("SELECT * FROM posts WHERE id = $1", [id]);
+    const result = await pool.query("SELECT posts.id, posts.image, posts.description, posts.add_person, posts.localization, users.name AS usuario FROM posts LEFT JOIN users ON posts.user_id = users.id WHERE posts.id = $1", [id]);
     return result.rows[0];
 };
 
@@ -21,11 +21,11 @@ const updatePost = async (id, description, add_person) => {
 };
 
 const deletePost = async (id) => {
-    const result = await pool.query("DELETE FROM posts WHERE id = $1", [id]);
+    const result = await pool.query("DELETE FROM posts WHERE id = $1 RETURNING *", [id]);
     if (result.rowCount === 0) {
         throw new Error("Post not found");
     }
     return result.rows[0];
-}
+};
 
 module.exports = { getPosts, getPostById, createPost, updatePost, deletePost };

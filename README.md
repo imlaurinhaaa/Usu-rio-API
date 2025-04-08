@@ -1,7 +1,4 @@
-# 🚀 Documentação das APIs
+# 🚀 Documentação da API
 
-### API - Usuários
-https://documenter.getpostman.com/view/42619953/2sAYdeMXSf
-
-### API - Post
-https://documenter.getpostman.com/view/42619953/2sAYdeMXSd
+### API - Users e Posts
+https://documenter.getpostman.com/view/42619953/2sB2cVf2FH
