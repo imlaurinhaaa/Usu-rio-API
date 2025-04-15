@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
+const upload = require("../config/upload");
 
 /**
  * @swagger
@@ -21,7 +22,7 @@ router.get("/users", userController.getAllUsers);
  *         description: Usuários retornos com sucesso
  */
 
-router.post("/users", userController.createUser);
+router.post("/users", upload.single("photo"), userController.createUser);
 /**
  * @swagger
  * /api/users:

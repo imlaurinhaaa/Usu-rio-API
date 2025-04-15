@@ -10,10 +10,10 @@ const getUserById = async (id) => {
     return result.rows[0];
 };
 
-const createUser = async (name, email, age) => {
+const createUser = async (name, email, age, photo) => {
     const result = await pool.query(
-        "INSERT INTO users (name, email, age) VALUES ($1, $2, $3) RETURNING *",
-        [name, email, age]
+        "INSERT INTO users (name, email, age, photo) VALUES ($1, $2, $3, $4) RETURNING *",
+        [name, email, age, photo]
     );
     return result.rows[0];
 };
