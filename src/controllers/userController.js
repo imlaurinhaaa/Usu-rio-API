@@ -50,8 +50,8 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const message = await userModel.deleteUser(req.params.id);
-        res.json(message);
+        const deletedUser = await userModel.deleteUser(req.params.id);
+        res.status(200).json({ message: "Usuário deletado com sucesso", deletedUser });
     } catch (error) {
         res.status(404).json({ message: "Erro ao deletar usuário." });
     }

@@ -32,8 +32,7 @@ const deleteUser = async (id) => {
     if (result.rowCount === 0) {
         return { error: "Usuário não encontrado." };
     }
-
-    return { message: "Usuário deletado com sucesso." };
+    return result.rows[0];
 };
 
 module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser };

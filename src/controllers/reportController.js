@@ -28,6 +28,7 @@ const exportUserPDF = async (req, res) => {
         doc.text("Name", 100, y, { width: columnWidths[1], align: "left" });
         doc.text("Email", 250, y, { width: columnWidths[2], align: "left" });
         doc.text("Age", 450, y, { width: columnWidths[3], align: "left" });
+        doc.text("Photo", 450, y, { width: columnWidths[3], align: "left" });
         doc.moveTo(50, y + rowHeight - 5).lineTo(500, y + rowHeight - 5).stroke(); 
 
         // Dados da Tabela
@@ -38,6 +39,7 @@ const exportUserPDF = async (req, res) => {
             doc.text(user.name, 100, y, { width: columnWidths[1], align: "left" });
             doc.text(user.email, 250, y, { width: columnWidths[2], align: "left" });
             doc.text(user.age, 450, y, { width: columnWidths[3], align: "left" });
+            doc.text(user.photo, 450, y, { width: columnWidths[3], align: "left" });
             y += rowHeight;
 
             doc.moveTo(50, y - 5).lineTo(500, y - 5).stroke();

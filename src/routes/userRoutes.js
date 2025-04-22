@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const apiKeyMiddleware = require("../config/apiKey")
 const userController = require("../controllers/userController");
 const upload = require("../config/upload");
 
+router.use(apiKeyMiddleware);
 /**
  * @swagger
  * tags:
